@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Runnway control</title>
+    <script src="yocto_api.js"></script>
+    <script src="yocto_colorledcluster.js"></script>
+    <script src="jscode.js"></script>
+
+    <script>
+        let runway = null;
+
+        async function startDemo()
+        {
+            let ipaddr = window.location.host;
+            if (ipaddr.indexOf(':')<0)
+                ipaddr=ipaddr+":80";
+            runway = new Runnway(ipaddr);
+            let str_error = await runway.checkConfig();
+            if (str_error !== "") {
+                let elm = document.getElementById('error_msg');
+                elm.innerHTML = str_error;
+                alert(str_error);
+                setTimeout(startDemo, 1000);
+            } else {
+                let elm = document.getElementById('error');
+                elm.style.visibility = 'hidden';
+
+            }
+        }
+
+        function set_on()
+        {
+            if (runway)
+                runway.setLightOn();
+        }
+
+        function set_off()
+        {
+            if (runway)
+                runway.setLightOff();
+        }
+
+        function update_number(str_value)
+        {
+            let val = parseInt(str_value);
+            if (!isNaN(val)) {
+                runway.set_number(val);
+            }
+        }
+
+        startDemo();
+    </script>
+    <link rel="stylesheet" href="style.css"/>
+
+</head>
+<body>
+<div id="content">
+    <div class="section"><a href="javascript:set_off();">
+        <img src="off_128.png"
+             alt="runway light OFF">
+        <h3>Power OFF the runway.</h3>
+    </a>
+    </div>
+    <div class="section"><a href="javascript:set_on();">
+        <img src="on_128.png"
+             alt="runway light ON">
+        <h3>Power ON the runway.</h3></a>
+    </div>
+    <div class="section"><label for="orientation">Runway orientation:</label><br/><input id="orientation"
+                                                                                         type="text"
+                                                                                         value="0"
+                                                                                         onchange="update_number(this.value)">
+    </div>
+</div>
+<div id="error">
+    <span id="error_msg">Connecting To YoctoHub...</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+body {
+    white-space: nowrap;
+    background: black;
+    font-family: Arial, sans-serif;
+    color: white
+
+}
+
+#content {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: space-around;
+}
+
+
+@media only screen and (min-width: 768px) {
+    content{
+        flex-flow: row wrap;
+        /* Then we define how is distributed the remaining space */
+        justify-content: space-around;
+    }
+}
+
+
+.section {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px
+
+}
+
+h3 {
+
+    display: block;
+    margin-top: 2px
+}
+
+img {
+    display: block;
+    border-radius: 8px;
+    margin: auto
+
+}
+
+a {
+    text-decoration: none;
+    color: white
+
+}
+#error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #808080f0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+#error_msg {
+    font-size: x-large;
+
+}
+
+input {
+    text-align: center;
+}
